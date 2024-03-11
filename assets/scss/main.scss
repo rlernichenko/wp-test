@@ -1,0 +1,74 @@
+@import "template-styles";
+@import "fonts";
+
+*,
+html {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	overflow-anchor: none;
+	overflow-x: hidden;
+	padding: 0;
+	margin: 0;
+	font-family: "Gilroy", Helvetica, Arial, sans-serif;
+	min-height: 100vh;
+}
+
+
+
+.card-img,
+.card-img-top,
+.card-img-bottom {
+	height: auto;
+}
+
+
+
+.count-rating{
+	display: flex;
+	align-items: center;
+	margin-right: 5px;
+	font-size: 16px;
+}
+.star-rating{
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-around;
+	align-items: center;
+	flex-wrap: wrap;
+	max-width: 120px;
+}
+
+.star-rating svg path {
+	fill: #dddddd;
+	cursor: pointer;
+	transition: fill 0.2s ease-in-out;
+}
+.star-rating .star:hover > path,
+.star-rating .star:hover > path ~ .star > path{
+	fill: #ffc107;
+}
+
+
+@mixin previousSiblingHover($parent, $child, $sibling) {
+	#{$parent} {
+		display: flex;
+		flex-direction: row-reverse;
+		#{$child}:hover ~ #{$sibling } > path{
+			@content;
+		}
+	}
+}
+@include previousSiblingHover(".star-rating", ".star", ".star") {
+	fill: #ffc107;
+}
+
+// .star-rating .star.rated > path {
+// 	fill: #ffc107;
+// }
+
